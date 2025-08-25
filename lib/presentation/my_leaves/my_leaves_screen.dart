@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skakone/presentation/my_leaves/widget/my_leaves_widget.dart';
 
+import '../../core/constants/const_data.dart';
+
 
 
 class MyLeaves extends StatelessWidget {
@@ -8,9 +10,13 @@ class MyLeaves extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ConstData.prmClr,
+        foregroundColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Column(
             children: [
               Padding(

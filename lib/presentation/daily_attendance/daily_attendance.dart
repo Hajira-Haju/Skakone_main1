@@ -11,9 +11,13 @@ class DailyAttendance extends StatelessWidget {
     final GlobalKey<SlideActionState> checkInKey = GlobalKey();
 
 
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ConstData.prmClr,
+        foregroundColor: Colors.white,
+      ),
+      body: SafeArea(
+        child: Column(
           children: [
             const SizedBox(height: 30),
             Column(
@@ -95,7 +99,7 @@ class DailyAttendance extends StatelessWidget {
                 },
               ),
             ),
-
+            
             const SizedBox(height: 50),
           ],
         ),

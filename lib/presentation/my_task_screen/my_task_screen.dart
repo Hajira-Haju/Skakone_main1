@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skakone/presentation/my_task_screen/update_task_page.dart';
 
+import '../../core/constants/const_data.dart';
 import 'controller/my_task_controller.dart';
 
 class MyTaskScreen extends StatelessWidget {
@@ -9,6 +10,10 @@ class MyTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ConstData.prmClr,
+        foregroundColor: Colors.white,
+      ),
       body: Obx(
             () => SingleChildScrollView(
           child: Column(

@@ -136,7 +136,6 @@ class RequirementTask extends StatelessWidget {
         ),
 
       ),
-
     );
   }
 }

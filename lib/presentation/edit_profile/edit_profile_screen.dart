@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skakone/core/constants/const_data.dart';
 import 'package:skakone/presentation/edit_profile/widgets/edit_profile_widgets.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFFCA4842),
+        backgroundColor: ConstData.prmClr,
         title: const Text(
             'Edit Profile', style: TextStyle(color: Colors.white)),
         centerTitle: true,

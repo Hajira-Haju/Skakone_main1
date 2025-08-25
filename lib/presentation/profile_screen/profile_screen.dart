@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:skakone/core/constants/const_data.dart';
 import 'package:skakone/presentation/edit_profile/edit_profile_screen.dart';
 
 
@@ -14,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFCA4842),
+        backgroundColor: ConstData.prmClr,
         elevation: 0,
         centerTitle: true,
         title: const Text("Profile", style: TextStyle(color: Colors.white)),

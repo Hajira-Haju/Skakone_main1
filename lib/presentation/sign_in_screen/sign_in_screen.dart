@@ -29,6 +29,7 @@ class SignInScreen extends GetView<SignInController> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SignInWidget.customField(
+                  controller: controller.usernameController,
                   hintText: 'Username',
                   preIcon: Icons.person,
                 ),
@@ -38,6 +39,7 @@ class SignInScreen extends GetView<SignInController> {
                 () => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: SignInWidget.customField(
+                    controller: controller.passwordController,
                     hintText: 'Password',
                     preIcon: Icons.fingerprint,
                     suffixIcon: InkWell(
@@ -55,7 +57,15 @@ class SignInScreen extends GetView<SignInController> {
               SizedBox(height: 30),
               Align(
                 alignment: Alignment.center,
-                child: SignInWidget.customButton(),
+                child: Obx(() {
+                  return SignInWidget.customButton(
+                    title: "Login",
+                    onPressed: () {
+                      controller.login();
+                    },
+                    isLoading: controller.isLoading.value,
+                  );
+                }),
               ),
             ],
           ),

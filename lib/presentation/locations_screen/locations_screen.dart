@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skakone/presentation/locations_screen/widgets/location_widgets.dart';
 
+import '../../core/constants/const_data.dart';
 import 'controller/location_controller.dart';
 
 class LocationsScreen extends StatelessWidget {
@@ -12,6 +13,10 @@ class LocationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ConstData.prmClr,
+        foregroundColor: Colors.white,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

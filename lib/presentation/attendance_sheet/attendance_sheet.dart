@@ -23,21 +23,27 @@ class AttendanceSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => Column(
-        children: [
-          AttendanceWidget.filterBar(context, controller, () => pickDate(context)),
-          AttendanceWidget.tableHeader(),
-          Expanded(
-            child: controller.filteredData.isNotEmpty
-                ? ListView.builder(
-              itemCount: controller.filteredData.length,
-              itemBuilder: (context, index) =>
-                  AttendanceWidget.attendanceRow(
-                      controller.filteredData[index], controller),
-            )
-                : const Center(child: Text("No data found")),
-          ),
-        ],
+      appBar: AppBar(
+        backgroundColor: ConstData.prmClr,
+        foregroundColor: Colors.white,
+      ),
+      body: Obx(() => SafeArea(
+        child: Column(
+          children: [
+            AttendanceWidget.filterBar(context, controller, () => pickDate(context)),
+            AttendanceWidget.tableHeader(),
+            Expanded(
+              child: controller.filteredData.isNotEmpty
+                  ? ListView.builder(
+                itemCount: controller.filteredData.length,
+                itemBuilder: (context, index) =>
+                    AttendanceWidget.attendanceRow(
+                        controller.filteredData[index], controller),
+              )
+                  : const Center(child: Text("No data found")),
+            ),
+          ],
+        ),
       )),
     );
   }

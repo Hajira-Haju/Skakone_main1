@@ -13,177 +13,95 @@ class DrawerWidgets {
   static Widget drawer(DrawersController controller) {
     return Drawer(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 50),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                  vertical: 12,
+      child: Obx(() {
+        if (controller.isLoading.value) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (controller.menuList.isEmpty) {
+          return const Center(child: Text("No menu items"));
+        }
+
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 50),
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 12,
+                  ),
+                  child: Image.asset('assets/logo_no_desc.png', width: 80),
                 ),
-                child: Image.asset('assets/logo_no_desc.png', width: 80),
               ),
-            ),
-            customDivider(),
-            customListTile(
-              title: 'Home',
-              icon: Icons.home_outlined,
-              isSelected: controller.selectedIndex.value == 0 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 0;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
-            subHead('Management Report'),
-            customListTile(
-              title: 'Task Assigned report',
-              icon: Icons.subject,
-              isSelected: controller.selectedIndex.value == 1 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 1;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
-            customListTile(
-              title: 'Attendance sheet',
-              icon: Icons.task_alt,
-              isSelected: controller.selectedIndex.value == 2 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 2;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
-            subHead('Leave'),
-            customListTile(
-              title: 'Apply Leave',
-              icon: CupertinoIcons.add_circled,
-              isSelected: controller.selectedIndex.value == 3 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 3;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
-            customListTile(
-              title: 'My leaves',
-              icon: CupertinoIcons.list_number,
-              isSelected: controller.selectedIndex.value == 4 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 4;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
-            customListTile(
-              title: 'Holiday calendar',
-              icon: CupertinoIcons.calendar,
-              isSelected: controller.selectedIndex.value == 5 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 5;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
-            customListTile(
-              title: 'Daily Attendance',
-              icon: Icons.check_circle_outline,
-              isSelected: controller.selectedIndex.value == 6,
-              onTap: () {
-                controller.selectedIndex.value = 6;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
+              customDivider(),
+              customListTile(
+                title: 'Home',
+                icon: Icons.home_outlined,
+                isSelected: controller.selectedIndex.value == 0 ? true : false,
+                onTap: () {
+                  controller.selectedIndex.value = 0;
+                  controller.key.currentState!.closeDrawer();
+                },
+              ),
 
-            subHead('Task Management'),
-            customExpansionTile(
-              title: 'Add Task',
-              icon: Icons.add_task_outlined,
-              children: [
-                customListTile(
-                  title: 'Requirement Task',
-                  icon: Icons.assignment,
-                  isSelected: false,
-                  onTap: () {
-                    Get.to(RequirementTask());
-                    controller.key.currentState!.closeDrawer();
-                  },
-                ),
-                customListTile(
-                  title: 'Support Task',
-                  icon: Icons.support_agent,
-                  isSelected: false,
-                  onTap: () {
-                    Get.to(SupportTaskScreen());
-                    // Implement navigation if screen exists
-                    // Get.to(() => SupportTaskScreen());
-                    controller.key.currentState!.closeDrawer();
-                  },
-                ),
-                customListTile(
-                  title: 'Scheduled Task',
-                  icon: Icons.schedule,
-                  isSelected: false,
-                  onTap: () {
-                    Get.to(ScheduledTaskScreen());
-                    controller.key.currentState!.closeDrawer();
-                  },
-                ),
-                customListTile(
-                  title: 'General Task',
-                  icon: Icons.work_outline,
-                  isSelected: false,
-                  onTap: () {
-                    Get.to(GeneralTaskScreen());
-                    // Implement navigation if screen exists
-                    controller.key.currentState!.closeDrawer();
-                  },
-                ),
-              ],
-            ),
-            customListTile(
-              title: 'My Task',
-              icon: Icons.task_outlined,
-              isSelected: controller.selectedIndex.value == 7,
-              onTap: () {
-                controller.selectedIndex.value = 7;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
+              // 🔹 Flat list: parent then its submenus (indented)
+              ...controller.menuList.expand((menu) {
+                final List<Widget> items = [];
 
-            subHead('Sales Lead'),
-            customListTile(
-              title: 'Create New Lead',
-              icon: CupertinoIcons.person_add,
-              isSelected: controller.selectedIndex.value == 8 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 8;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
-            customListTile(
-              title: 'My Leads',
-              icon: CupertinoIcons.person_2_square_stack,
-              isSelected: controller.selectedIndex.value == 9 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 9;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
-            customDivider(),
-            customListTile(
-              title: 'Locations',
-              icon: CupertinoIcons.location_solid,
-              isSelected: controller.selectedIndex.value == 10 ? true : false,
-              onTap: () {
-                controller.selectedIndex.value = 10;
-                controller.key.currentState!.closeDrawer();
-              },
-            ),
+                // Parent item
+                items.add(
+                  customListTile(
+                    title: menu.menuTitle ?? "",
+                    icon: MenuIcons.parent(menu.menuTitle),
+                    isSelected: false,
+                    onTap: () {
+                      controller.key.currentState?.closeDrawer();
+                      controller.onParentTap(menu.menuId, menu.menuTitle);
+                    },
+                  ),
+                );
 
-          ],
-        ),
-      ),
+                // Submenus
+                if (menu.mobileSubMenu != null &&
+                    menu.mobileSubMenu!.isNotEmpty) {
+                  items.addAll(
+                    menu.mobileSubMenu!.map((sub) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: customListTile(
+                          title: sub.subMenuName ?? "",
+                          icon: MenuIcons.sub(
+                            sub.pageCode,
+                            fallbackTitle: sub.subMenuName,
+                          ),
+                          isSelected: false,
+                          onTap: () {
+                            controller.key.currentState?.closeDrawer();
+                            controller.onSubTap(
+                              parentId: menu.menuId,
+                              subId: sub.subMenuId,
+                              subTitle: sub.subMenuName,
+                              pageCode:
+                                  sub.pageCode, // may be null; safe to pass
+                            );
+                          },
+                        ),
+                      );
+                    }).toList(),
+                  );
+                }
+
+                return items;
+              }).toList(),
+
+              customDivider(),
+            ],
+          ),
+        );
+      }),
     );
   }
 
@@ -246,5 +164,38 @@ class DrawerWidgets {
 
   static Widget customDivider() {
     return Divider(thickness: .5);
+  }
+}
+
+class MenuIcons {
+  // Top-level menu icons (by menuTitle)
+  static final Map<String, IconData> _parent = {
+    'management report': Icons.assessment, // was subject/analytics
+    'leave': Icons.beach_access,
+    'task management': Icons.task_alt,
+    'sales lead': Icons.trending_up,
+    // add more if API returns other sections
+  };
+
+  // Submenu icons (by subMenuName)
+  static final Map<String, IconData> _sub = {
+    'task assigned report': Icons.subject,
+    'attendance sheet': Icons.task_alt,
+    'apply leave': Icons.add_circle_outline,
+    'my leaves': Icons.list_alt,
+    'holiday calendar': Icons.calendar_month,
+    'daily attendance': Icons.check_circle_outline,
+    'add task': Icons.add_task,
+    'my task': Icons.task_outlined,
+    'create new lead': Icons.person_add_alt,
+    'my leads': Icons.people_alt_outlined,
+  };
+
+  static IconData parent(String? title) =>
+      _parent[title?.toLowerCase().trim() ?? ''] ?? Icons.menu;
+
+  static IconData sub(String? titleOrCode, {String? fallbackTitle}) {
+    final key = (titleOrCode ?? fallbackTitle ?? '').toLowerCase().trim();
+    return _sub[key] ?? Icons.circle;
   }
 }

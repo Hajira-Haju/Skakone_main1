@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skakone/core/constants/const_data.dart';
 import 'package:skakone/presentation/acc_info/widgets/acc_info_widgets.dart';
 
 
@@ -10,7 +11,7 @@ class AccountInfo extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.red.shade50,
       appBar: AppBar(
-        backgroundColor: Color(0xFFCA4842),
+        backgroundColor: ConstData.prmClr,
         centerTitle: true,
         elevation: 0,
         leading: IconButton(

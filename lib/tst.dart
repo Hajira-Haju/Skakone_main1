@@ -51,4 +51,5 @@ class _LocalAuthExampleState extends State<LocalAuthExample> {
       ),
     );
   }
+
 }

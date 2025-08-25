@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:skakone/presentation/task_assigned_report_screen/widget/task_assigned_report_widget.dart';
+import '../../core/constants/const_data.dart';
 import 'controller/task_assigned_report_controller.dart';
 
 class TaskAssignedReportScreen extends StatelessWidget {
@@ -10,6 +11,10 @@ class TaskAssignedReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ConstData.prmClr,
+        foregroundColor: Colors.white,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
